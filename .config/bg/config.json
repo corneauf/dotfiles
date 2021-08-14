@@ -9,13 +9,14 @@
       "are you happy.",
       "not real.",
       "anxiety.",
-      "pop ollies, not percs."
+      "pop ollies, not percs.",
+      "blind."
   ],
   "polygons": [3, 4, 5, 7],
   "intensity_shifts": [15, 20],
   "intensity_increments": [2, 3],
   "background_location": "$HOME/pictures/",
-  "font_location": "/usr/local/share/fonts/ttf - Mx (mixed outline-bitmap)/Mx437_TsengEVA_132_6x8.ttf"
+  "font_location": "/usr/local/share/fonts/ttf - Mx (mixed outline+bitmap)/Mx437_TsengEVA_132_6x8.ttf"
 }
 
 

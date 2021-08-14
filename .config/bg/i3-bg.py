@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 from screeninfo import get_monitors
@@ -55,7 +56,9 @@ def create_image() -> Image:
 
 
 def main():
-    background_path = config["background_location"] + "background.png"
+    background_path = (
+        os.path.expandvars(config["background_location"]) + "background.png"
+    )
 
     def workspace_event(i3, event):
         if event.change != "focus":
