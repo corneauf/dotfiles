@@ -58,7 +58,6 @@ def main():
     background_path = config["background_location"] + "background.png"
 
     def workspace_event(i3, event):
-        phrases = get_phrases()
         if event.change != "focus":
             return
 
