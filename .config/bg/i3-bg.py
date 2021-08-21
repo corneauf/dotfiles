@@ -16,6 +16,30 @@ with open(config_path, "r") as f:
     config = json.load(f)
 
 
+class ImageMaker:
+    def __init__(self):
+        self.background_path = (
+            os.path.expandvars(config["background_location"]) + "background.png"
+        )
+        self.last_polygon = -1
+
+    def make_image(self):
+        img = create_image()
+
+        possible_polygons = config["polygons"]
+
+        while (n_sides := random.choice(possible_polygons)) == self.last_polygon:
+            continue
+
+        self.last_polygon = n_sides
+
+        draw_polygons(img, n_sides)
+        draw_text(img, config["phrases"])
+
+        img.save(self.background_path)
+        run(["feh", "--bg-max", self.background_path])
+
+
 def draw_text(img: Image, phrases: List[str]):
     # TODO: Obtain font location from font name to simplify configuration file.
     font_path = config["font_location"]
@@ -27,11 +51,9 @@ def draw_text(img: Image, phrases: List[str]):
     draw.text(center, text, font=fnt, fill=255)
 
 
-def draw_polygons(img: Image):
+def draw_polygons(img: Image, n_sides: int):
     draw = ImageDraw.Draw(img)
 
-    possible_polygons = config["polygons"]
-    n_sides = random.choice(possible_polygons)
     intensity_shifts = random.randint(*config["intensity_shifts"])
     intensity = 0
     center = (img.width / 2, img.height / 2)
@@ -56,20 +78,13 @@ def create_image() -> Image:
 
 
 def main():
-    background_path = (
-        os.path.expandvars(config["background_location"]) + "background.png"
-    )
+    maker = ImageMaker()
 
     def workspace_event(i3, event):
         if event.change != "focus":
             return
 
-        img = create_image()
-        draw_polygons(img)
-        draw_text(img, config["phrases"])
-
-        img.save(background_path)
-        run(["feh", "--bg-max", background_path])
+        maker.make_image()
 
     i3 = Connection()
     i3.on("workspace", workspace_event)
