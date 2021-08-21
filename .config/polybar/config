@@ -1,0 +1,62 @@
+[bar/bar_top]
+bottom = false
+width = 100%
+fixed-center = true
+height = 20
+background = #00000000
+
+modules-left = battery pulseaudio
+modules-center = i3
+modules-right = network date
+
+padding-right = 1
+padding-left = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Mx437 TsengEVA 132 6x8:size=12;4
+
+[module/date]
+type = internal/date
+
+interval = 1.0
+date = %d/%m
+time = %H:%M
+
+format = <label>
+label = %time% - %date%
+
+[module/network]
+type = internal/network
+interface = wlan0
+
+label-connected = up.
+label-disconnected = down.
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume-prefix = "audio: "
+format-volume = <bar-volume>
+bar-volume-width = 11
+bar-volume-gradient = false
+bar-volume-indicator = ┼
+bar-volume-fill = ─
+bar-volume-empty = ─
+
+format-muted-prefix = "audio: "
+format-muted = <label-muted>
+label-muted = muted.
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+poll-interval = 5
+
+label-charging = charge: %percentage%%
+label-discharging = discharge: %percentage_raw%%
+label-full = full.
+
+[module/i3]
+type = internal/i3
