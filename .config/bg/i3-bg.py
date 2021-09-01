@@ -81,7 +81,7 @@ def main():
     maker = ImageMaker()
 
     def workspace_event(i3, event):
-        if event.change != "focus":
+        if event.change != "init":
             return
 
         maker.make_image()

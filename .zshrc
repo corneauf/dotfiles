@@ -5,6 +5,10 @@ export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 export ZSH="/home/corneau/.oh-my-zsh"
 export WORKON_HOME=$HOME/.virtualenvs
 
+# Custom exports
+export PI_ADDRESS=192.168.1.35
+
+# Source virtualenv wrapper script
 source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Set name of the theme to load --- if set to "random", it will
